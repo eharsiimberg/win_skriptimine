@@ -10,6 +10,8 @@ foreach ($kasutaja in $kasutajad){
     #
     $upname = $kasutajanimi + "@sv-kool.local"
     #
+    $ErrorActionPreference = "SilentlyContinue"
+    #
     $displayname = $kasutaja.FirstName + " " + $kasutaja.LastName
     New-ADUser -Name $kasutajanimi `
         -DisplayName $displayname `
@@ -19,6 +21,14 @@ foreach ($kasutaja in $kasutajad){
         -Title $kasutaja.Role `
         -UserPrincipalName $upname `
         -AccountPassword (ConvertTo-SecureString $kasutaja.Password -AsPlainText -Force) -Enabled $true
+    if (!$?)
+    {
+    echo "Kasutaja $kasutajanimi on juba olemas"
+    }
+    else
+    {
+    echo "Kasutaja $kasutajanimi on loodud edukalt!"
+    }
 }
 # Täpitähe fix
 function Translit {
