@@ -10,7 +10,7 @@ $kasutajanimi = $eesnimi + "." + $perenimi
 $kasutajanimi = $kasutajanimi.ToLower()
 $kasutajanimi = TransLit($kasutajanimi)
 
-Remove-ADUser $kasutajanimi -Confirm $false
+Remove-ADUser $kasutajanimi -Confirm:$false 
 #--------------------------------
     if (!$?)
     {
